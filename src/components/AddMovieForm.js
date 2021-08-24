@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addMovie } from '../actions/movieActions';
-
+import { v4 as uuidv4 } from "uuid";
 import { Link, useHistory } from 'react-router-dom';
+
+const randomId = uuidv4();
 
 const AddMovieForm = (props) => {
     const { push } = useHistory();
@@ -12,25 +14,23 @@ const AddMovieForm = (props) => {
         director: "",
         genre: "",
         metascore: 0,
-        description:""
+        description:"",
+        id: Date.now()
     });
+
 
     const handleChange = (e) => {
         setMovie({
             ...movie,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
+
     }
 
     const handleSubmit = (e) =>{
+
         e.preventDefault()
-        setMovie({
-            ...movie,
-            [e.target.name]: e.target.value
-            
-        })
         push('/movies')
-        //console.log(movie)
         props.addMovie(movie);
     }
 

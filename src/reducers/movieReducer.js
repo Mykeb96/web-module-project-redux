@@ -15,7 +15,7 @@ const reducer = (state = initialState, action) => {
         case ADD_MOVIE:
             return {
                 ...state,
-                movies: action.payload
+                movies: [...state.movies, action.payload]
             }
         default:
             return state;
